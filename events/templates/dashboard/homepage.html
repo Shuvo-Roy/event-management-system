@@ -1,0 +1,83 @@
+{% extends "Dashboard/index.html" %}
+{% block title %}Event Management{% endblock %}
+{% block content %}
+
+    <section class="relative w-full h-screen flex items-center justify-center">
+        <!-- Banner Image -->
+        <div class="absolute inset-0">
+            <img src="https://img.freepik.com/free-photo/asian-retail-employee-arranging-new-collection-clothes-display_482257-113821.jpg" class="w-full h-full object-cover">
+        </div>
+        
+        <!-- Hero Section -->
+        <div class="relative z-10 text-center text-white px-6">
+            <h1 class="text-4xl md:text-6xl font-bold text-white">Make Every Event Unforgettable!</h1>
+            <p class="mt-4 text-lg md:text-xl">From stunning weddings to corporate gatherings and grand celebrations, we bring your vision to life with seamless planning and flawless execution. Let us handle the details while you enjoy the moment!</p>
+            <p class="mt-4 text-lg md:text-xl">
+                <span class="text-red-500">Weddings</span> |  
+                <span class="text-blue-500">Corporate Events</span> |  
+                <span class="text-green-500">Parties</span> |  
+                <span class="text-purple-500">Conferences</span>
+              </p>
+              <a href="{% url 'add_participant' %}" class="mt-6 inline-block px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg shadow-lg transition-all duration-300">Register Now</a>
+
+        </div>
+    </section>
+    <main class="container mx-auto px-6">
+        <div class=" p-4 flex  gap-10 mb-8 mt-10 md:flex-row flex-col">
+           <a href="{% url 'home' %}?type=Total_Events" >
+            <h3 class="text-lg font-extrabold text-[#ed4842] hover:text-[#ed4842]">All Events</h3>
+           </a>
+           <a href="{% url 'home' %}?type=Upcoming_Events" >
+            <h3 class="text-lg font-extrabold text-[#435469] hover:text-[#ed4842]">Upcoming Events</h3>
+           </a>
+           <a href="{% url 'home' %}?type=Past_Events" >
+            <h3 class="text-lg font-extrabold text-[#435469] hover:text-[#ed4842]">Past Events</h3>
+           </a>
+        </div>        
+        <div class="p-4">
+            <div class="mx-auto flex justify-between items-center">
+                <p class="text-3xl font-bold mb-4">Event List</p>
+                <div>
+                    <a href="{% url 'add_participant' %}" 
+                       class="px-6 py-2 text bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow-lg">
+                        Join Now!
+                    </a>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {% for event in events %}
+                <a href="{% url 'Details' event.id %}">
+                    <div class="bg-white shadow-lg overflow-hidden">
+                        <img class="w-full h-48 p-2 object-cover border-b rounded" src="https://img.freepik.com/free-photo/activities-hipster-inspire-inspiration-icon_53876-21306.jpg" alt="Event Image">
+                        <div class="p-4">
+                            <div>
+                                <h2 class="text-xl text-black">{{ event.title|slice:":15" }}</h2>
+                            <p class="text-gray-600 pt-2">{{ event.description|slice:":35" }}</p>
+                            </div>
+                            <div class="flex justify-between">
+                                <p class="text-gray-600"> {{ event.location }} </p>
+                                <p class="text-gray-600 text-sm"> {{ event.date }} at {{ event.time }} </p>
+                            </div>
+                            <div>
+                               <p class="text-gray-600">Category: {{ event.category.name }} </p>
+                               <p class="text-gray-600">Total Participants: {{ event.total_participants }}</p> 
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-10">
+        <div class="container mx-auto text-center">
+            <p class="text-lg">&copy; 2025 Event Management. All rights reserved.</p>
+            <p class="mt-2">
+                <a href="#" class="text-blue-400 hover:underline">Privacy Policy</a> | 
+                <a href="#" class="text-blue-400 hover:underline">Terms of Service</a>
+            </p>
+        </div>
+    </footer>
+{% endblock %}
+    

@@ -1,0 +1,55 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Home{% endblock %}</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Playwrite+IN:wght@100..400&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+        }
+    </style>
+</head>
+<body >
+    <nav class="bg-gray-800 p-4">
+      <div class="container flex justify-between items-center mx-auto">
+          <a href="{% url 'home' %}"  class="text-white text-lg font-bold">Event Management</a>
+          <div class="hidden md:flex items-center space-x-4">
+              <a href="{% url 'home' %}" class="text-gray-300 hover:text-white">Home</a>
+              <a href="{% url 'Organizer_Dashboard' %}"  class="text-gray-300 hover:text-white">Dashboard</a>
+              <button class="px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">Log In</button>
+          </div>
+          <!-- Mobile Menu Button -->
+          <div class="md:hidden">
+              <button id="menu-toggle" class="text-white focus:outline-none">
+                  <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                  </svg>
+              </button>
+          </div>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden mt-4 space-y-4">
+          <a href="{% url 'home' %}" class="block text-gray-300 hover:text-white">Home</a>
+          <a href="{% url 'Organizer_Dashboard' %}" class="block text-gray-300 hover:text-white">Dashboard</a>
+          <button class="block px-3 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg w-full">Log In</button>
+      </div>
+  </nav>
+  
+  <script>
+      const menuToggle = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      menuToggle.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+      });
+  </script>
+    {% block content %}{% endblock  %}
+    
+</body>
+</html>
